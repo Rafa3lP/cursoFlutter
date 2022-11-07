@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:primeiro_projeto/components/task.dart';
+import 'package:primeiro_projeto/screens/form_screen.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({Key? key}) : super(key: key);
@@ -9,51 +10,31 @@ class InitialScreen extends StatefulWidget {
 }
 
 class _InitialScreenState extends State<InitialScreen> {
-  bool showList = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: Container(),
-        title: const Text("Tarefas"),
+        title: const Text('Tarefas'),
       ),
-      body: AnimatedOpacity(
-        duration: const Duration(milliseconds: 500),
-        opacity: showList ? 1 : 0,
-        child: ListView(
-          children: const [
-            Task(
-                'Aprender Flutter',
-                'assets/images/dash.png',
-                3),
-            Task(
-                'Andar de Bike',
-                'assets/images/bike.webp',
-                2),
-            Task(
-                'Ler',
-                'assets/images/livro.jpg',
-                5),
-            Task(
-                'Meditar',
-                'assets/images/meditar.jpeg',
-                4),
-            Task('Jogar videogame',
-                'assets/images/jogar.jpg', 1),
-            SizedBox(height: 80,)
-          ],
-        ),
+      body: ListView(
+        children: const [
+          Task('Aprender Flutter', 'assets/images/dash.png', 3),
+          Task('Andar de Bike', 'assets/images/bike.webp', 2),
+          Task('Ler', 'assets/images/livro.jpg', 5),
+          Task('Meditar', 'assets/images/meditar.jpeg', 4),
+          Task('Jogar videogame', 'assets/images/jogar.jpg', 1),
+          SizedBox(
+            height: 80,
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            showList = !showList;
-          });
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const FormScreen()));
         },
-        child: showList
-            ? const Icon(Icons.visibility_off)
-            : const Icon(Icons.visibility),
+        child: const Icon(Icons.add),
       ),
     );
   }
